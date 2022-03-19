@@ -37,5 +37,4 @@ export default {
         }
         this.setItem(STORAGE_KEY, val);
     }
-
 }
