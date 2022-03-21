@@ -12,7 +12,7 @@
         },
         data() {
             return {
-                res: {}
+                // res: {}
             }
         },
         mounted() {
@@ -30,9 +30,9 @@
             //     this.res = res;
             // });
             //本地集成mockjs实现数据Mock
-            this.axios.get('/user/login').then((res) => {
-                this.res = res;
-            });
+            // this.axios.get('/user/login').then((res) => {
+            //     this.res = res;
+            // });
 
         }
     }
@@ -40,4 +40,5 @@
 
 <style>
 @import './assets/scss/reset.scss'; 
+/* @import './assets/scss/config.scss'; */
 </style>

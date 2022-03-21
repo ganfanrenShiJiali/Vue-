@@ -9,9 +9,10 @@
                     <a href="javasript:;">协议规则</a>
                 </div>
                 <div class="topbar-user">
-                    <a href="javasript:;">登录</a>
-                    <a href="javasript:;">注册</a>
-                    <a href="javasript:;" class="my-cart"><span class="icon-cart"></span>购物车</a>
+                    <a href="javasript:;" v-if="username">{{username}}</a>
+                    <a href="javasript:;" v-if="!username" @click="login">登录</a>
+                    <a href="javasript:;" v-if="username">我的订单</a>
+                    <a href="javasript:;" class="my-cart" @click="goToCart"><span class="icon-cart"></span>购物车</a>
                 </div>
             </div>
         </div>
@@ -26,6 +27,16 @@
                         <span>小米手机</span>
                         <div class="children">
                             <ul>
+                                <li class="product" v-for="(item,index) in phoneList" :key="index">
+                                    <!-- a行内可以嵌套div -->
+                                    <a v-bind:href="'/#/product/'+item.id" target="_blank">
+                                        <div class="pro-img">
+                                            <img :src="item.mainImage" :alt="item.subtitle">
+                                        </div>
+                                        <div class="pro-name">{{item.name}}</div>
+                                        <div class="pro-price">{{item.price | currency}}</div>
+                                    </a>
+                                </li>
                                 <li class="product">
                                     <!-- a行内可以嵌套div -->
                                     <a href="#" target="_blank">
@@ -45,7 +56,7 @@
                                         <div class="pro-name">小米CC9</div>
                                         <div class="pro-price">1799元</div>
                                     </a>
-                                </li>
+                                </li>                           
                                 <li class="product">
                                     <!-- a行内可以嵌套div -->
                                     <a href="#" target="_blank">
@@ -173,7 +184,45 @@
 </template>
 <script>
     export default {
-        name: 'nav-header' //组件名称或者页面名称，加载组件引用的值
+        name: 'nav-header', //组件名称或者页面名称，加载组件引用的值
+        data() {
+            return {
+                username:'jack',//默认用户名
+                phoneList:[]
+            }
+        },
+        //过滤器：金额格式化 日期格式化
+        filters:{
+            currency(val){
+                if(!val) return '0.00';
+                return '￥' + val.toFixed(2) + '元';
+            }
+        },
+        mounted() {
+            this.getProductList();
+        },
+        methods:{
+            login() {
+                this.$router.push('/login');
+            },
+            getProductList() {
+                //如果是get请求，用params传参，如果是post请求，传参直接写
+                this.axios.get('/products', {
+                    params: {
+                        categoryId:'100012',//产品类型
+                        pageSize:6
+                    }
+                }).then((res)=>{
+                    //如果产品数量大于6，就截取前6个
+                    if(res.list.length>=6) {
+                        this.phoneList = res.list.slice(0,6);
+                    }
+                })
+            },
+            goToCart(){
+                this.$router.push('/cart');
+            }
+        }
     }
 </script>
 <style lang="scss">

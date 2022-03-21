@@ -12,9 +12,6 @@ module.exports = { //导出一个object对象
                     'api': ''
                 }
             }
-            // '/foo': {
-            //     target: "<other_url>"
-            // }
         }
     }
 }
