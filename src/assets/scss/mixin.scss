@@ -1,0 +1,14 @@
+//flex布局复用
+@mixin flex($hov:space-between, $col:center) {
+    display: flex;
+    justify-content: $hov; //均匀排列每个元素，首个元素放置于起点，末尾元素放置于终点。
+    align-items: $col; //垂直居中
+}
+
+@mixin bgImg($w:0, $h:0, $img:'', $size:contain) {
+    display: inline-block;
+    width: $w;
+    height: $h;
+    background: url($img) no-repeat center;
+    background-size: $size; //保持图像的纵横比并将图像缩放成将适合背景定位区域的最大大小
+}
