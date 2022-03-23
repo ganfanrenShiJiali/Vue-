@@ -145,12 +145,13 @@
             </div>
             <div class="ads-box">
                 <a v-bind:href="'/#/product/'+item.id" v-for="(item,index) in adsList" v-bind:key="index">
-                    <img v-bind:src="item.img" alt="">
+                    <img v-lazy="item.img" alt="">
                 </a>
             </div>
             <div class="banner">
                 <a href="/#/product/30">
-                    <img src="/imgs/banner-1.png" alt="">
+                    <!-- v-lazy里面不是字符串是一个变量，因此加单引号 -->
+                    <img v-lazy="'/imgs/banner-1.png'" alt="">
                 </a>
             </div>
         </div>
@@ -159,7 +160,7 @@
                 <h2>手机</h2>
                 <div class="wrapper">
                     <div class="banner-left">
-                            <a href="/#/product/35"><img src="/imgs/mix-alpha.jpg" alt=""></a>
+                            <a href="/#/product/35"><img v-lazy="'/imgs/mix-alpha.jpg'" alt=""></a>
                     </div>
                     <div class="list-box">
                         <div class="list" v-for="(arr,i) in phoneList" v-bind:key="i">
@@ -167,8 +168,8 @@
                                 <!-- 如果是偶数就是新品 -->
                                 <span v-bind:class="{'new-pro':j%2==0}">新品</span>
                                 <div class="item-img">
-                                    <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0d4b362431de4bdda03315ffdbc7b32a.jpg?thumb=1&w=260&h=260&f=webp&q=90" alt="">
-                                    <!-- <img v-bind:src="item.mainImage" alt=""> -->
+                                    <img v-lazy="'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0d4b362431de4bdda03315ffdbc7b32a.jpg?thumb=1&w=260&h=260&f=webp&q=90'" alt="">
+                                    <!-- <img v-lazy="item.mainImage" alt=""> -->
                                 </div>
                                 <div class="item-info">
                                     <h3>Xiaomi 11 青春活力版</h3>
