@@ -175,7 +175,7 @@
                                     <!-- <h3>{{item.name}}</h3> -->
                                     <p>骁龙855，索尼4800万超广角微距</p>
                                     <!-- <p>{{item.subtitle}}</p> -->
-                                    <p class="price">2999元</p>
+                                    <p class="price" @click="addCart(item.id)">2999元</p>
                                     <!-- <p class="price">{{item.price}}元</p> -->
                                 </div>
                             </div>
@@ -185,10 +185,25 @@
             </div>
         </div>
         <service-bar></service-bar>
+        <!-- 因为modal不是一个标签而是一个组件，用子组件定义的@名称，而不是v-on:click -->
+        <modal 
+            modalType="middle" 
+            title="提示" 
+            sureText="查看购物车" 
+            btnType="3" v-bind:showModal="showModal"
+            v-on:submit="goToCart"
+            v-on:cancel="showModal=false"
+        >
+            <!-- //插槽首先定义一个template模板，然后用v-slot:插槽名称 -->
+            <template v-slot:body>
+                <p>商品添加成功！</p>
+            </template>
+        </modal>
     </div>
 </template>
 <script>
     import ServiceBar from './../components/ServiceBar'
+    import Modal from './../components/Modal'
     import { swiper, swiperSlide } from 'vue-awesome-swiper'
     import "swiper/dist/css/swiper.css"   
     
@@ -197,7 +212,8 @@
         components: { //加载多个组件
             swiper,
             swiperSlide,
-            ServiceBar
+            Modal,
+            ServiceBar   
         },
         data() {
             return {
@@ -291,13 +307,13 @@
                 ],
                 phoneList: [
                     [0,0,0,0],[0,0,0,0]
-                ]
-
+                ],
+                showModal: false
             }
         },/*
         mounted() {
             this.init();
-        },
+        },*/
         methods: {
             init() {
                this.axios.get('/products',{
@@ -310,13 +326,30 @@
                        this.list = res.list.slice(6,14);
                        this.phoneList = [res.list.slice(0,4),res.list.slice(4,8)];
                }) 
+            },
+            addCart(){
+                this.showModal = true;
+                
+                // this.axios.post('/carts',{
+                //     productId: id,
+                //     // 加入购物车之后默认选中状态
+                //     selected: true 
+                // }).then(()=>{
+
+                // }).catch(()=>{
+                //     this.showModal = true;
+                // })
+            },
+            goToCart() {
+                this.$router.push('/cart');
             }
-        }*/
+        }
     }
 </script>
 <style lang="scss">
     @import './../assets/scss/mixin.scss';
     @import './../assets/scss/config.scss';
+    // @import './../assets/scss/modal.scss';
     .index {
         .swiper-box {
             position: relative;
@@ -499,5 +532,6 @@
                 }
             }
         }
+        
     }
 </style>

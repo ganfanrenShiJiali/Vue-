@@ -1,8 +1,8 @@
 //flex布局复用
 @mixin flex($hov:space-between, $col:center) {
     display: flex;
-    justify-content: $hov; //均匀排列每个元素，首个元素放置于起点，末尾元素放置于终点。
-    align-items: $col; //垂直居中
+    justify-content: $hov;
+    vertical-align: $col;
 }
 
 @mixin bgImg($w:0, $h:0, $img:'', $size:contain) {
@@ -10,5 +10,23 @@
     width: $w;
     height: $h;
     background: url($img) no-repeat center;
-    background-size: $size; //保持图像的纵横比并将图像缩放成将适合背景定位区域的最大大小
+    background-size: $size;
+}
+
+@mixin position($pos:absolute, $top:0, $left:0, $w:100%, $h:100%) {
+    position: $pos;
+    top: $top;
+    left: $left;
+    width: $w;
+    height: $h;
+}
+
+@mixin positionImg($pos:absolute, $top:0, $right:0, $w:0, $h:0, $img:'', $size:contain) {
+    position: $pos;
+    top: $top;
+    right: $right;
+    width: $w;
+    height: $h;
+    background: url($img) no-repeat center;
+    background-size: $size;
 }
