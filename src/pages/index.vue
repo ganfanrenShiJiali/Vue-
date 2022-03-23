@@ -164,14 +164,19 @@
                     <div class="list-box">
                         <div class="list" v-for="(arr,i) in phoneList" v-bind:key="i">
                             <div class="item" v-for="(item,j) in arr" v-bind:key="j">
-                                <span>新品</span>
+                                <!-- 如果是偶数就是新品 -->
+                                <span v-bind:class="{'new-pro':j%2==0}">新品</span>
                                 <div class="item-img">
                                     <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0d4b362431de4bdda03315ffdbc7b32a.jpg?thumb=1&w=260&h=260&f=webp&q=90" alt="">
+                                    <!-- <img v-bind:src="item.mainImage" alt=""> -->
                                 </div>
                                 <div class="item-info">
                                     <h3>Xiaomi 11 青春活力版</h3>
+                                    <!-- <h3>{{item.name}}</h3> -->
                                     <p>骁龙855，索尼4800万超广角微距</p>
+                                    <!-- <p>{{item.subtitle}}</p> -->
                                     <p class="price">2999元</p>
+                                    <!-- <p class="price">{{item.price}}元</p> -->
                                 </div>
                             </div>
                         </div>
@@ -287,8 +292,26 @@
                 phoneList: [
                     [0,0,0,0],[0,0,0,0]
                 ]
+
             }
-        }
+        },/*
+        mounted() {
+            this.init();
+        },
+        methods: {
+            init() {
+               this.axios.get('/products',{
+                        params: {
+                            categoryId:100012,
+                            pageSize:14
+                        }
+                   }).then((res)=>{
+                       //slice不会改变原数组，splice改变原数组
+                       this.list = res.list.slice(6,14);
+                       this.phoneList = [res.list.slice(0,4),res.list.slice(4,8)];
+               }) 
+            }
+        }*/
     }
 </script>
 <style lang="scss">
@@ -422,10 +445,26 @@
                             background-color: $colorG;
                             text-align: center;
                             span {
-
+                                text-align: center;
+                                // position: absolute;
+                                display: inline-block;
+                                width: 67px;
+                                height: 24px;
+                                line-height: 24px;
+                                font-size: 14px;
+                                color: #fff;
+                                //新品
+                                &.new-pro {
+                                    background-color: #7ECF68;
+                                }
+                                //秒杀
+                                &.kill-pro {
+                                    background-color: #E82626;
+                                }
                             }
                             .item-img {
                                 img {
+                                    // width: 100%;
                                     height: 195px;
                                 }
                             }
