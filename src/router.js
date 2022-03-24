@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import Router from 'vue-router' //引入组件，组件首字母大写
 import Home from './pages/home'
+import Login from './pages/login'
 import Index from './pages/index'
 import Product from './pages/product'
 import Detail from './pages/detail'
@@ -40,6 +41,11 @@ export default new Router({ //导出
             path: '/cart',
             name: 'cart',
             component: Cart
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: Login
         },
         {
             path: '/order',

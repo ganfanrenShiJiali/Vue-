@@ -10,9 +10,9 @@
                 </div>
                 <div class="topbar-user">
                     <a href="javasript:;" v-if="username">{{username}}</a>
-                    <a href="javasript:;" v-if="!username" @click="login">登录</a>
+                    <a href="/#/login" v-if="!username" @click="login">登录</a>
                     <a href="javasript:;" v-if="username">我的订单</a>
-                    <a href="javasript:;" class="my-cart" @click="goToCart"><span class="icon-cart"></span>购物车</a>
+                    <a href="javasript:;" class="my-cart" @click="goToCart"><span class="icon-cart"></span>购物车({{cartCount}})</a>
                 </div>
             </div>
         </div>
@@ -183,13 +183,23 @@
     </div>
 </template>
 <script>
+    import {mapState} from 'vuex';
     export default {
         name: 'nav-header', //组件名称或者页面名称，加载组件引用的值
         data() {
             return {
-                username:'jack',//默认用户名
+                // username: this.$store.state.username,//默认用户名
                 phoneList:[]
             }
+        },
+        computed: {
+            // username() {
+            //     return this.$store.state.username;
+            // },
+            // cartCount() {
+            //     return this.$store.state.cartCount;
+            // }
+            ...mapState(['username', 'cartCount'])
         },
         //过滤器：金额格式化 日期格式化
         filters:{
@@ -247,6 +257,7 @@
                     background-color: #F60;
                     text-align: center;
                     color: #fff;
+                    margin-right: 0;
                     .icon-cart {
                         @include bgImg(16px,12px,'/imgs/icon-cart-checked.png');
                         margin-right:4px;
