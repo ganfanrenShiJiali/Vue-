@@ -7,6 +7,17 @@
                 </div>
             </template>
         </product-param>
+        <div class="h">123</div>
+        <div class="h">123</div>
+        <div class="h">123</div>
+        <div class="h">123</div>
+        <div class="h">123</div>
+        <div class="h">123</div>
+        <div class="h">123</div>
+        <div class="h">123</div>
+        <div class="h">123</div>
+        <div class="h">123</div>
+
     </div>
 </template>
 <script>
@@ -20,6 +31,10 @@
 </script>
 <style lang="scss">
     .product {
+        .h {
+            height: 150px;
+
+        }
         .btn {
             margin-left: 10px;
         }
