@@ -221,7 +221,7 @@
                 swiperOption:{
                     autoplay: true,//自动播放
                     loop: true,//循环
-                    effect: 'cube',//coverflow\flip\cube\slide切换效果
+                    effect: 'cube',//coverflow \ flip \ cube \ slide切换效果
                     //立方体切换效果参数
                     cubeEffect: {
                         slideshadows: true,
