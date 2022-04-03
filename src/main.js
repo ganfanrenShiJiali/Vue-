@@ -9,7 +9,7 @@ import store from './store'
 // import env from './env'
 
 //mock开关
-const mock = false;
+const mock = true;
 if (mock) {
     require('./mock/api');
 }
