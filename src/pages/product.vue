@@ -28,11 +28,32 @@
             <div class="item-swiper">
                 <swiper v-bind:options="swiperOption">
                     <swiper-slide v-for="(item,index) in sliderList" v-bind:key="index">
-                        <a v-bind:href="'/#/product/'+ item.id"><img v-bind:src="item.img"></a>
+                        <a href="javascript:;"><img v-bind:src="item.img"></a>
                     </swiper-slide>
                     <div class="swiper-pagination" slot="pagination"></div>
                 </swiper>
                 <p class="desc">小米8 AI变焦双摄拍摄</p>
+            </div>
+            <div class="item-video">
+                <h2>
+                    60帧超慢动作摄影<br/>
+                    慢慢回味每一瞬间的精彩
+                </h2>
+                <p>
+                    后置960帧电影般超慢动作视频，将眨眼间的美妙展现得淋漓尽致！<br>
+                    更能AI 精准分析视频内容，15个场景智能匹配背景音效。
+                </p>
+                <div class="video-bg">
+                </div>
+                <div class="video-box">
+                    <!-- 视频遮罩 -->
+                    <div class="overlay"></div>
+                    <div class="video">
+                        <!-- autoplay自动播放，controls进度条 muted静音输出，辅助自动播放-->
+                        <span class="icon-close"></span>
+                        <video src="/imgs/product/video.mp4" muted autoplay controls="controls"></video>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -87,6 +108,7 @@
     }
 </script>
 <style lang="scss">
+    @import './../assets/scss/mixin.scss';
     .product {
         .btn {
             margin-left: 10px;
@@ -139,6 +161,63 @@
                     font-size:18px;
                     color:#333333;
                     text-align:center;
+                }
+            }
+            .item-video {
+                height: 1044px;
+                background-color: #070708;
+                color: #fff;
+                margin-bottom: 76px;
+                text-align: center;
+                h2 {
+                    font-size: 60px;
+                    padding-top: 82px;
+                    margin-bottom: 47px;
+                }
+                p {
+                    font-size: 24px;
+                    margin-bottom: 58px;
+                }
+                .video-bg {
+                    background: url(/imgs/product/gallery-1.png) no-repeat 50%;
+                    background-size: cover;
+                    width: 1226px;
+                    height: 540px;
+                    margin: 0 auto;
+                    cursor: pointer;
+                }
+                .video-box {
+                    // z-index: 100;
+                    .overlay {
+                        @include position(fixed);
+                        background-color: #333;
+                        opacity: .4;
+                        z-index: 10;
+                    }
+                    .video {
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%,-50%);
+                        z-index: 10;
+                        width: 1000px;
+                        height: 536px;
+                        .icon-close {
+                            position: absolute;
+                            top: 20px;
+                            right: 20px;
+                            @include bgImg(20px,20px,'/imgs/icon-close.png');
+                            cursor: pointer;
+                            z-index: 11;
+                        }
+                        video {
+                            width: 100%;
+                            height: 100%;
+                            // 改变视频组件原有样式，使得视频内容覆盖整个窗口
+                            object-fit: cover;
+                            outline: none;
+                        }
+                    }
                 }
             }
         }
