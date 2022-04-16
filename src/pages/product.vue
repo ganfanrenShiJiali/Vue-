@@ -1,16 +1,16 @@
 <template>
     <div class="product">
-        <product-param>
+        <product-param v-bind:title="product.name">
             <template v-slot:buy>
-                <div class="btn">
+                <div class="btn" @click="buy">
                     立即购买
                 </div>
             </template>
         </product-param>
         <div class="content">
             <div class="item-bg">
-                <h2>Redmi K20 Pro 尊享版</h2>
-                <h3>真旗舰、敢K.O.</h3>
+                <h2>{{product.name}}</h2>
+                <h3>{{product.info}}</h3>
                 <div class="intro">
                     <a href="java">全球首款双频 GP</a><span>|</span>
                     <a href="">骁龙845</a><span>|</span>
@@ -18,7 +18,7 @@
                     <a href="">红外人脸识别</a>
                 </div>
                 <div class="price">
-                    <span>￥<em>2999</em></span>
+                    <span>￥<em>{{product.price}}</em></span>
                 </div>
             </div>
             <div class="item-bg-2">
@@ -71,7 +71,14 @@
         },
         data() {
             return {
-                showSlide: false,
+                showSlide: false,//控制动画效果
+                // 商品信息
+
+                product: {
+                    name: '小米CC9',
+                    info: '3200万自拍，4800万三摄',
+                    price: '1799'
+                },
                 swiperOption: {
                     autoplay: true,//自动播放
                     slidesPerView:3,//设置slider容器能够同时显示的slides数量
@@ -103,7 +110,70 @@
                         // id: '42',
                         img: '/imgs/product/gallery-6.jpg'
                     },
+                ],
+                productInfoList: [
+                    {
+                        id: '42',
+                        name: '小米CC9',
+                        info: '3200万自拍，4800万三摄',
+                        price: '1799'
+                    },
+                    {                        
+                        id: '33',
+                        name: '小米9',
+                        info: '小米9 战斗天使',
+                        price: '2599'
+                    },
+                    {
+                        id: '48',
+                        name: 'Redmi K20 Pro 尊享版',
+                        info: '真旗舰、敢K.O.',
+                        price: '2699'
+                    },
+                    {
+                        id: '45',
+                        name: '红米Note 7',
+                        info: '4800万拍照千元机 / 品质“小金刚',
+                        price: '999'
+                    },
+                    {
+                        id: '47',
+                        name: '小米MIX 3',
+                        info: '一面科技，一面艺术',
+                        price: '2599'
+                    }
                 ]
+            }
+        },
+        // mounted是vue中的一个钩子函数，一般在初始化页面完成后，再对dom节点进行相关操作
+        mounted() {
+            //自理解。对methods里面的函数进行初始化
+            this.getProductInfo();
+        },
+        
+        methods: {
+            getProductInfo() {
+                // 获取路由参数用this.$route.params.,路由跳转是$router.push
+                let id = this.$route.params.id;
+                console.log(id);
+                // 根据获取到的id调用商品接口
+                // this.axios.get(`/products/${id}`).then((res)=>{
+                //     this.product = res;
+                // })
+                // let myname = '';
+                // let myinfo = '';
+                // let myprice = 0;
+                for(let i=0;i<this.productInfoList.length;i++) {
+                    if(this.productInfoList.at(i).id === id) {
+                        this.product.name = this.productInfoList.at(i).name;
+                        this.product.info = this.productInfoList.at(i).info;
+                        this.product.price = this.productInfoList.at(i).price;
+                    }
+                }
+            },
+            buy() {
+                let id = this.$route.params.id;
+                this.$router.push(`/detial/${id}`);
             }
         }
     }

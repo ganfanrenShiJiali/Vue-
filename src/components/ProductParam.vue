@@ -3,7 +3,7 @@
     <div class="nav-bar" v-bind:class="{'is-fixed':isFixed}">
          <div class="container">
              <div class="pro-title">
-                 小米cc9
+                 {{title}}
              </div>
              <div class="pro-param">
                  <a href="javascript:;">概述</a><span>|</span>
@@ -20,6 +20,10 @@
 <script>
     export default{
         name: 'nav-bar',
+        // 父组件的数据需要通过 prop 才能下发到子组件中。props是子组件访问父组件数据的唯一接口
+        props: {
+            title: String
+        },
         data() {
             return  {
                 isFixed: false
