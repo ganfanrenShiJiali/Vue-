@@ -173,7 +173,7 @@
             },
             buy() {
                 let id = this.$route.params.id;
-                this.$router.push(`/detial/${id}`);
+                this.$router.push(`/detail/${id}`);
             }
         }
     }
