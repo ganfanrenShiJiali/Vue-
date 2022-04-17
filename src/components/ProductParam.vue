@@ -60,6 +60,7 @@
             top: 0;
             box-shadow: 0 5px 5px $colorE;
             width: 100%; //改变宽度，原来只有1226px，现在改成通栏
+            z-index: 100;
         }
         .container {
             @include flex();
